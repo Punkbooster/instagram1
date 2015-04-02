@@ -1,0 +1,26 @@
+.row
+  .col-lg-3.5
+  .col-lg-5
+    %h1 Welocme to Dislike Instagram!
+    %p
+      .pull-right
+      = link_to 'New Post', new_post_path, class: 'btn btn-primary btn-lg btn-block'
+    - @posts.each do |post|
+      %p
+        %h3
+          %strong 
+            = post.description 
+      = image_tag post.photo, size: '520x400'
+      %p
+        .holder
+          %button.btn.btn-defoult{:type => "button"}
+            %span.glyphicon.glyphicon-user{"aria-hidden" => "true"}
+              = post.user_id
+          %button.btn.btn-danger{:type => "button"}
+            %span.glyphicon.glyphicon-thumbs-down{"aria-hidden" => "true"}
+              = post.dislike_count
+      %p 
+        = link_to 'Show', post, class: 'btn btn-default'
+        = link_to 'Edit', edit_post_path(post), class: 'btn btn-default'
+        = link_to 'Dislike', dislike_post_path(post), class: 'btn btn-default'
+        = link_to 'Destroy', post, :method => :delete, :data => { :confirm => 'Are you sure?' }, class: 'btn btn-default'
